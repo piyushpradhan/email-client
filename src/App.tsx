@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { fetchEmails } from "./api";
 import "./App.css";
+import EmailList from "./components/EmailList/EmailList";
 
 function App() {
   return (
     <div className="App">
-      <h1>Something in here</h1>
+      <EmailList />
     </div>
   );
 }

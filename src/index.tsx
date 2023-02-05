@@ -1,16 +1,29 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { Provider } from "react-redux";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "./index.css";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
 
+const queryCache = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+      retry: false,
+      // only if the0 values in the backend are changing with time
+      // staleTime: 30000,
+    },
+  },
+});
+
 root.render(
   <React.StrictMode>
-    <App />
+    <QueryClientProvider client={queryCache}>
+      <App />
+    </QueryClientProvider>
   </React.StrictMode>
 );
 
