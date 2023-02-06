@@ -3,6 +3,17 @@ export const EmailQuery = {
   EMAIL: "EMAIL",
 } as const;
 
+export const EmailActions = {
+  UPDATE: "UPDATE",
+  TOGGLE: "TOGGLE",
+  MARK_READ: "MARK_READ",
+} as const;
+
+export type ActionType = {
+  type: string;
+  payload: any;
+};
+
 export type EmailSender = {
   email: string;
   name: string;
@@ -19,4 +30,5 @@ export type Email = {
   from: EmailSender;
   subject: string;
   short_description: string;
+  isRead?: boolean;
 };

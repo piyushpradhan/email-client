@@ -1,0 +1,28 @@
+.email-body {
+  background: white;
+  border: 2px solid var(--border);
+  border-radius: var(--border-radius);
+  width: 100%;
+  flex: 2;
+  display: flex;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.avatar-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex: 1;
+}
+
+.body-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex: 5;
+}
+
+.email-from {
+  text-align: start;
+}

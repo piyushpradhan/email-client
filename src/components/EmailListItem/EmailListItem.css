@@ -2,11 +2,25 @@
   display: flex;
   width: 100%;
   flex-direction: row;
-  padding: 0.4rem 1.2rem;
-  border: 1px solid var(--border);
-  border-radius: 0.4rem;
+  padding: 0rem 1.2rem;
+  padding-top: 1rem;
+  border: 2px solid var(--border);
+  border-radius: var(--border-radius);
   gap: 1.4rem;
-  background-color: white;
+}
+
+.email-container-unread {
+  background: white;
+}
+
+.email-container-read {
+  background: var(--read-background);
+}
+
+@media screen and (max-width: 645px) {
+  .email-container {
+    flex-direction: column;
+  }
 }
 
 .email-container:hover {
@@ -30,7 +44,7 @@
 .email-from {
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   margin: 0;
   padding: 0;
 }

@@ -1,7 +1,11 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 import { convertTime } from "../../utils/helper";
 import type { Email } from "../../utils/types";
+import { emailActionCreators } from "../../redux/actions";
 import "./EmailListItem.css";
+import { bindActionCreators } from "@reduxjs/toolkit";
 
 type EmailListItemProps = {
   email: Email;
@@ -10,21 +14,34 @@ type EmailListItemProps = {
 const EmailListItem: React.FC<EmailListItemProps> = ({
   email,
 }: EmailListItemProps) => {
+  const dispatch = useDispatch();
+  const { markEmailRead } = bindActionCreators(emailActionCreators, dispatch);
+
+  function openEmail() {
+    if (!email.isRead) markEmailRead(email.id);
+    // TODO: Add logic to display the slave element
+  }
+
   return (
-    <article className="email-container">
+    <article
+      onClick={openEmail}
+      className={`email-container ${
+        email.isRead ? "email-container-read" : "email-container-unread"
+      }`}
+    >
       <div className="avatar">{email?.from?.name[0].toUpperCase()}</div>
       <div className="email-body-container">
         <div className="email-details-container">
-          <p className="email-from">
+          <span className="email-from">
             <p>From:</p>
             <strong>
               {email?.from?.name}&lt;{email?.from?.email}&gt;
             </strong>
-          </p>
-          <p className="email-subject">
+          </span>
+          <span className="email-subject">
             <p>Subject:</p>
             <strong>{email?.subject}</strong>
-          </p>
+          </span>
         </div>
         <span className="email-short-description">
           {email?.short_description}

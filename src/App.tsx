@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { fetchEmails } from "./api";
+import React from "react";
 import "./App.css";
 import EmailList from "./components/EmailList/EmailList";
 
