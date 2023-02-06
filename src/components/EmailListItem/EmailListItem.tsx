@@ -7,6 +7,7 @@ import { emailActionCreators } from "../../redux/actions";
 import "./EmailListItem.css";
 import { bindActionCreators } from "@reduxjs/toolkit";
 import { useFetchEmailBody } from "../../hooks/useEmailQuery";
+import { fetchEmailBody } from "../../api";
 
 type EmailListItemProps = {
   email: Email;
@@ -23,8 +24,9 @@ const EmailListItem: React.FC<EmailListItemProps> = ({
 
   function openEmail() {
     if (!email.isRead) markEmailRead(email.id);
-    // const { data } = useFetchEmailBody(email.id);
-    // setSelectedEmail(email.id, data.body);
+    fetchEmailBody(email.id).then((result) => {
+      setSelectedEmail((parseInt(result.id) - 1).toString(), result.body);
+    });
   }
 
   return (
