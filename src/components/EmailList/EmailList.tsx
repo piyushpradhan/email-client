@@ -14,11 +14,11 @@ const EmailList = () => {
   const { isLoading, isSuccess, isError, data } = useFetchAllEmails();
   const { updateAllEmails } = bindActionCreators(emailActionCreators, dispatch);
 
-  const emails = useSelector((state: RootState) => state.emailReducer.emails);
+  const emailState = useSelector((state: RootState) => state.emailReducer);
 
   useEffect(() => {
     if (!isLoading && isSuccess) {
-      const result: Email[] = data.list.map((email: any) => ({
+      const result: Email[] = data.list.map((email: Email) => ({
         ...email,
         isRead: false,
       }));
@@ -32,11 +32,15 @@ const EmailList = () => {
       {isSuccess && (
         <div className="emails-container">
           <div className="email-list">
-            {emails.map((email: Email) => (
+            {emailState.emails.map((email: Email) => (
               <EmailListItem key={email.id} email={email} />
             ))}
           </div>
-          <EmailBody email={emails[0]} />
+          {emailState.selectedEmailId !== "" && (
+            <EmailBody
+              email={emailState.emails[parseInt(emailState.selectedEmailId)]}
+            />
+          )}
         </div>
       )}
     </div>

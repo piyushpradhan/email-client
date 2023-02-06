@@ -18,3 +18,15 @@ export const markEmailRead = (id: string) => {
   };
   return dispatchAction(action);
 };
+
+export const setSelectedEmail = (id: string, body: string) => {
+  const action: ActionType = {
+    type: EmailActions.SET_SELECTED,
+    payload: {
+      id: id,
+      body: body,
+    },
+  };
+
+  return dispatchAction(action);
+};

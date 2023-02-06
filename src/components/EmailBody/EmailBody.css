@@ -20,9 +20,45 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  width: 100%;
   flex: 5;
+  gap: 1.6rem;
+  padding-right: 4rem;
 }
 
 .email-from {
   text-align: start;
+  font-weight: 500;
+}
+
+.email-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.email-fav-button {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  background-color: var(--accent);
+  outline: none;
+  border: none;
+  color: white;
+  font-weight: 600;
+  border-radius: 9999px;
+}
+
+.email-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  gap: 1rem;
+  font-size: 0.9rem;
+  margin-top: -1rem;
+}
+
+.email-body-content {
+  text-align: start;
+  line-height: 1.5rem;
 }

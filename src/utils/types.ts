@@ -7,6 +7,7 @@ export const EmailActions = {
   UPDATE: "UPDATE",
   TOGGLE: "TOGGLE",
   MARK_READ: "MARK_READ",
+  SET_SELECTED: "SET_SELECTED",
 } as const;
 
 export type ActionType = {

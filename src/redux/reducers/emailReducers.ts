@@ -2,10 +2,16 @@ import { EmailActions, ActionType, Email } from "../../utils/types";
 
 type EmailState = {
   emails: Email[];
+  selectedEmailId: string;
+  selectedEmailBody: string;
+  favoriteEmails: Email[];
 };
 
 const initialState: EmailState = {
   emails: [],
+  selectedEmailId: "",
+  selectedEmailBody: "",
+  favoriteEmails: [],
 };
 
 export const emailReducer = (state = initialState, action: ActionType) => {
@@ -26,6 +32,12 @@ export const emailReducer = (state = initialState, action: ActionType) => {
           },
           ...state.emails.slice(action.payload),
         ],
+      };
+    case EmailActions.SET_SELECTED:
+      return {
+        ...state,
+        selectedEmailId: action.payload.id,
+        selectedEmailBody: action.payload.body,
       };
     default:
       return state;
