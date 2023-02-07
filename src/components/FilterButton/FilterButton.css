@@ -1,0 +1,15 @@
+.filter-button-container > button {
+  padding: 0.1rem 1rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  background: transparent;
+  font-size: 1rem;
+  outline: none;
+  border: 1px solid transparent;
+  text-align: center;
+}
+
+.filter-button-container > button:focus {
+  background: var(--filter-button);
+  border: 1px solid var(--border);
+}
