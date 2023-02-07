@@ -73,10 +73,21 @@
 
 .close-button {
   position: absolute;
+  width: 1.6rem;
+  height: 1.6rem;
   right: 10rem;
   border: none;
   outline: none;
   background: white;
+  border-radius: 100%;
+  aspect-ratio: 1;
+  transition: all;
+  transition-duration: 200ms;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  background: var(--read-background);
 }
 
 @media screen and (min-width: 1024px) {
