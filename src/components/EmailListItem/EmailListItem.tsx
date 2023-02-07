@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux/store";
 import { convertTime } from "../../utils/helper";
@@ -17,13 +17,18 @@ const EmailListItem: React.FC<EmailListItemProps> = ({
   email,
 }: EmailListItemProps) => {
   const dispatch = useDispatch();
-  const { markEmailRead, setSelectedEmail } = bindActionCreators(
-    emailActionCreators,
-    dispatch
-  );
+  const { markEmailRead, setSelectedEmail, markEmailReadInUnread } =
+    bindActionCreators(emailActionCreators, dispatch);
+  const emailState = useSelector((state: RootState) => state.emailReducer);
+  const [isRead, setIsRead] = useState<boolean>(false);
 
   function openEmail() {
-    if (!email.isRead) markEmailRead(email.id);
+    if (!email.isRead && emailState.selectedFilter === 0)
+      markEmailRead(email.id);
+    if (!email.isRead && emailState.selectedFilter !== 0) {
+      markEmailReadInUnread(email.id);
+      setIsRead(true);
+    }
     fetchEmailBody(email.id).then((result) => {
       setSelectedEmail((parseInt(result.id) - 1).toString(), result.body);
     });
@@ -33,7 +38,9 @@ const EmailListItem: React.FC<EmailListItemProps> = ({
     <article
       onClick={openEmail}
       className={`email-container ${
-        email.isRead ? "email-container-read" : "email-container-unread"
+        email.isRead || isRead
+          ? "email-container-read"
+          : "email-container-unread"
       }`}
     >
       <div className="avatar">{email?.from?.name[0].toUpperCase()}</div>

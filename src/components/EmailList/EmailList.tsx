@@ -17,8 +17,6 @@ const EmailList = () => {
 
   const emailState = useSelector((state: RootState) => state.emailReducer);
 
-  const [selectedFilter, setSelectedFilter] = useState<number>(0);
-
   useEffect(() => {
     if (!isLoading && isSuccess) {
       const result: Email[] = data.list.map((email: Email) => ({
@@ -34,9 +32,9 @@ const EmailList = () => {
       {isLoading && <div>Loading...</div>}
       <div className="filter-container">
         <p>Filter By: </p>
-        <FilterButton label="Unread" isSelected={selectedFilter === 1} />
-        <FilterButton label="Read" isSelected={selectedFilter === 2} />
-        <FilterButton label="Favorite" isSelected={selectedFilter === 3} />
+        <FilterButton label="Unread" index={1} />
+        <FilterButton label="Read" index={2} />
+        <FilterButton label="Favorite" index={3} />
       </div>
       {isSuccess && (
         <div className="emails-container">
@@ -46,9 +44,13 @@ const EmailList = () => {
               display: `${emailState.selectedEmailId === "" ? "flex" : ""}`,
             }}
           >
-            {emailState.emails.map((email: Email) => (
-              <EmailListItem key={email.id} email={email} />
-            ))}
+            {emailState.selectedFilter === 0
+              ? emailState.emails.map((email: Email) => (
+                <EmailListItem key={email.id} email={email} />
+              ))
+              : emailState.filteredEmails.map((email: Email) => (
+                <EmailListItem key={email.id} email={email} />
+              ))}
           </div>
           {emailState.selectedEmailId !== "" && (
             <EmailBody

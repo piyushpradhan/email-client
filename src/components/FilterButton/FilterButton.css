@@ -7,9 +7,10 @@
   outline: none;
   border: 1px solid transparent;
   text-align: center;
+  cursor: pointer;
 }
 
-.filter-button-container > button:focus {
+.focused-button {
   background: var(--filter-button);
   border: 1px solid var(--border);
 }

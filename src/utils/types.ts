@@ -8,6 +8,10 @@ export const EmailActions = {
   TOGGLE: "TOGGLE",
   MARK_READ: "MARK_READ",
   SET_SELECTED: "SET_SELECTED",
+  SHOW_UNREAD: "SHOW_UNREAD",
+  SHOW_READ: "SHOW_READ",
+  SHOW_FAV: "SHOW_FAV",
+  MARK_READ_IN_UNREAD: "MARK_READ_IN_UNREAD",
 } as const;
 
 export type ActionType = {

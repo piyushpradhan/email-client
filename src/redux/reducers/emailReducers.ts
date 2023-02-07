@@ -5,6 +5,8 @@ type EmailState = {
   selectedEmailId: string;
   selectedEmailBody: string;
   favoriteEmails: Email[];
+  filteredEmails: Email[];
+  selectedFilter: number;
 };
 
 const initialState: EmailState = {
@@ -12,6 +14,8 @@ const initialState: EmailState = {
   selectedEmailId: "",
   selectedEmailBody: "",
   favoriteEmails: [],
+  filteredEmails: [],
+  selectedFilter: 0,
 };
 
 export const emailReducer = (state = initialState, action: ActionType) => {
@@ -38,6 +42,48 @@ export const emailReducer = (state = initialState, action: ActionType) => {
         ...state,
         selectedEmailId: action.payload.id,
         selectedEmailBody: action.payload.body,
+      };
+    case EmailActions.SHOW_UNREAD:
+      return {
+        ...state,
+        selectedFilter: action.payload,
+        filteredEmails: state.emails.filter((email: Email) => {
+          if (!email.isRead) return email;
+        }),
+      };
+    case EmailActions.SHOW_READ:
+      return {
+        ...state,
+        selectedFilter: action.payload,
+        filteredEmails: state.emails.filter((email: Email) => {
+          if (email.isRead) return email;
+        }),
+      };
+    case EmailActions.SHOW_FAV:
+      return {
+        ...state,
+        selectedFilter: action.payload,
+        filteredEmails: state.favoriteEmails,
+      };
+    case EmailActions.MARK_READ_IN_UNREAD:
+      return {
+        ...state,
+        emails: [
+          ...state.emails.slice(0, action.payload - 1),
+          {
+            ...state.emails[action.payload - 1],
+            isRead: true,
+          },
+          ...state.emails.slice(action.payload),
+        ],
+        filteredEmails: [
+          ...state.filteredEmails.slice(0, action.payload - 1),
+          {
+            ...state.filteredEmails[action.payload - 1],
+            isRead: true,
+          },
+          ...state.filteredEmails.slice(action.payload),
+        ],
       };
     default:
       return state;
