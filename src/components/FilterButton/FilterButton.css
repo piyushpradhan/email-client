@@ -13,4 +13,5 @@
 .focused-button {
   background: var(--filter-button);
   border: 1px solid var(--border);
+  border-radius: 9999px;
 }
