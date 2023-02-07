@@ -20,6 +20,10 @@ const EmailBody = ({ email }: { email: Email }) => {
     (state: RootState) => state.emailReducer.selectedEmailBody
   );
 
+  function closeEmailBody() {
+    setSelectedEmail("", "");
+  }
+
   useEffect(() => {
     if (!isLoading && isSuccess) {
       setSelectedEmail(data.id, data.body);
@@ -42,6 +46,9 @@ const EmailBody = ({ email }: { email: Email }) => {
           dangerouslySetInnerHTML={{ __html: emailContent }}
         ></div>
       </div>
+      <button onClick={closeEmailBody} className="close-button">
+        &times;
+      </button>
     </div>
   );
 };

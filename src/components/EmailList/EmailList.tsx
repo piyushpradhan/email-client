@@ -31,7 +31,12 @@ const EmailList = () => {
       {isLoading && <div>Loading...</div>}
       {isSuccess && (
         <div className="emails-container">
-          <div className="email-list">
+          <div
+            className="email-list"
+            style={{
+              display: `${emailState.selectedEmailId === "" ? "flex" : ""}`,
+            }}
+          >
             {emailState.emails.map((email: Email) => (
               <EmailListItem key={email.id} email={email} />
             ))}

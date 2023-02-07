@@ -46,7 +46,6 @@
   align-items: start;
   gap: 1rem;
   overflow-x: hidden;
-  text-overflow: ellipsis;
 }
 
 .email-details-container {
@@ -84,6 +83,7 @@
 .email-short-description {
   color: var(--text);
   text-align: start;
+  overflow-x: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
