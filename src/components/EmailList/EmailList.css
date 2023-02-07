@@ -9,7 +9,11 @@
   flex-direction: row;
   width: 100%;
   max-height: 100vh;
-  gap: 4rem;
+  gap: 1rem;
+}
+
+.emails-container::-webkit-scrollbar {
+  display: none;
 }
 
 .email-list {
@@ -17,8 +21,8 @@
   flex-direction: column;
   gap: 1rem;
   flex: 1;
-  overflow: scroll;
-  padding-bottom: 3rem;
+  overflow-y: scroll;
+  padding-bottom: 4rem;
   padding-right: 4rem;
 }
 

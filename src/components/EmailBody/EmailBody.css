@@ -3,6 +3,8 @@
   border: 2px solid var(--border);
   border-radius: var(--border-radius);
   width: 100%;
+  height: inherit;
+  margin-bottom: 4rem;
   flex: 2;
   display: flex;
   padding: 2rem;
@@ -40,6 +42,8 @@
 
 .email-fav-button {
   padding: 0.5rem 1rem;
+  word-break: keep-all;
+  overflow: hidden;
   cursor: pointer;
   background-color: var(--accent);
   outline: none;
@@ -60,5 +64,9 @@
 
 .email-body-content {
   text-align: start;
-  line-height: 1.5rem;
+  overflow-y: scroll;
+}
+
+.email-body-content::-webkit-scrollbar {
+  display: none;
 }
