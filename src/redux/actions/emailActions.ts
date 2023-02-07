@@ -47,3 +47,11 @@ export const markEmailReadInUnread = (id: string) => {
   };
   return dispatchAction(action);
 };
+
+export const markAsFavorite = (email: Email) => {
+  const action: ActionType = {
+    type: EmailActions.MARK_FAV,
+    payload: email,
+  };
+  return dispatchAction(action);
+};

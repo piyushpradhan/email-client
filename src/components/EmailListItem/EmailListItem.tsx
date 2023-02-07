@@ -6,7 +6,6 @@ import type { Email } from "../../utils/types";
 import { emailActionCreators } from "../../redux/actions";
 import "./EmailListItem.css";
 import { bindActionCreators } from "@reduxjs/toolkit";
-import { useFetchEmailBody } from "../../hooks/useEmailQuery";
 import { fetchEmailBody } from "../../api";
 
 type EmailListItemProps = {
@@ -17,10 +16,15 @@ const EmailListItem: React.FC<EmailListItemProps> = ({
   email,
 }: EmailListItemProps) => {
   const dispatch = useDispatch();
-  const { markEmailRead, setSelectedEmail, markEmailReadInUnread } =
-    bindActionCreators(emailActionCreators, dispatch);
+  const {
+    markEmailRead,
+    setSelectedEmail,
+    markEmailReadInUnread,
+    markAsFavorite,
+  } = bindActionCreators(emailActionCreators, dispatch);
   const emailState = useSelector((state: RootState) => state.emailReducer);
   const [isRead, setIsRead] = useState<boolean>(false);
+  const isFavorite = emailState.favoriteEmails.includes(email);
 
   function openEmail() {
     if (!email.isRead && emailState.selectedFilter === 0)
@@ -32,6 +36,13 @@ const EmailListItem: React.FC<EmailListItemProps> = ({
     fetchEmailBody(email.id).then((result) => {
       setSelectedEmail((parseInt(result.id) - 1).toString(), result.body);
     });
+  }
+
+  function addToFavorite(e: any) {
+    e.stopPropagation();
+    if (!isFavorite) {
+      markAsFavorite(email);
+    }
   }
 
   return (
@@ -62,7 +73,7 @@ const EmailListItem: React.FC<EmailListItemProps> = ({
         </span>
         <div className="email-footer">
           <p>{convertTime(email?.date)}</p>
-          <p>Favorite</p>
+          <p onClick={addToFavorite}>Favorite</p>
         </div>
       </div>
     </article>

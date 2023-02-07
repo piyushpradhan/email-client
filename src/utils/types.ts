@@ -12,6 +12,7 @@ export const EmailActions = {
   SHOW_READ: "SHOW_READ",
   SHOW_FAV: "SHOW_FAV",
   MARK_READ_IN_UNREAD: "MARK_READ_IN_UNREAD",
+  MARK_FAV: "MARK_FAV",
 } as const;
 
 export type ActionType = {

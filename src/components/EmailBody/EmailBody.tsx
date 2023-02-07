@@ -11,7 +11,7 @@ import "./EmailBody.css";
 const EmailBody = ({ email }: { email: Email }) => {
   const dispatch = useDispatch();
   const { isLoading, isSuccess, isError, data } = useFetchEmailBody(email.id);
-  const { setSelectedEmail } = bindActionCreators(
+  const { setSelectedEmail, markAsFavorite } = bindActionCreators(
     emailActionCreators,
     dispatch
   );
@@ -30,13 +30,19 @@ const EmailBody = ({ email }: { email: Email }) => {
     }
   }, []);
 
+  function addToFavorite() {
+    markAsFavorite(email);
+  }
+
   return (
     <div className="email-body">
       <div className="avatar">{email?.from?.name[0].toUpperCase()}</div>
       <div className="body-container">
         <header className="email-header">
           <h1 className="email-from">{email?.from?.name}</h1>
-          <button className="email-fav-button">Mark as favorite</button>
+          <button onClick={addToFavorite} className="email-fav-button">
+            Mark as favorite
+          </button>
         </header>
         <div className="email-footer">
           <p>{convertTime(email?.date)}</p>

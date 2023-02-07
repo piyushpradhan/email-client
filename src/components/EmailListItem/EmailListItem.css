@@ -99,5 +99,6 @@
 
 .email-footer > p:nth-child(2) {
   color: var(--accent);
+  cursor: pointer;
   font-weight: 600;
 }

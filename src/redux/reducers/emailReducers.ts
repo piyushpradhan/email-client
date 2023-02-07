@@ -85,6 +85,11 @@ export const emailReducer = (state = initialState, action: ActionType) => {
           ...state.filteredEmails.slice(action.payload),
         ],
       };
+    case EmailActions.MARK_FAV:
+      return {
+        ...state,
+        favoriteEmails: [...state.favoriteEmails, action.payload],
+      };
     default:
       return state;
   }
